@@ -1,0 +1,29 @@
+<!-- form.html -->
+<div>
+
+
+         <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Evaluaci&oacute;n de Desempeño</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+     
+            <!-- the links to our nested states using relative paths -->
+            <!-- add the active class if the state matches our ui-sref -->
+            <div id="status-buttons" class="text-center">
+                <a ui-sref-active="active" ui-sref=".comunicacion"><span></span> Comunciaci&oacute;n</a>
+                <a ui-sref-active="active" ui-sref=".desempenio"><span></span> Desempeño</a>
+                <a ui-sref-active="active" ui-sref=".factorhumano"><span></span> Factor Humano</a>
+                <a ui-sref-active="active" ui-sref=".liderazgo"><span></span> Liderazgo</a>
+                <a ui-sref-active="active" ui-sref=".habilidades"><span></span> Habilidades</a>
+            </div>
+        </div>
+        
+        <!-- use ng-submit to catch the form submission and use our Angular function -->
+        <form id="eval-form" ng-submit="processForm()">
+
+            <!-- our nested state views will be injected here -->
+            <div id="form-views" ui-view></div>
+        </form>
+
+    </div>

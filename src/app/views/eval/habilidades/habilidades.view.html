@@ -1,0 +1,49 @@
+<div class="form-group">
+        <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <h3>Habilidades</h3>
+                            <p>Contestar la siguiente evaluaci&oacute;n de desempeño en realici&oacute;n a las aptitudes y capacidades del evaluado</p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>
+                                               Excelente                                               
+                                            </th>
+                                            <th>
+                                                Bueno                                              
+                                            </th>
+                                            <th>
+                                                Regular                                             
+                                            </th>
+                                            <th>
+                                                Malo                                       
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr ng-repeat="item in habilidades">
+                                            <th>{{item.descripcion}}</th>
+                                            <td align="center"><input type="radio" ng-model="item.seleccion" value="excelente" ng-required="!item.seleccion"></td>
+                                            <td align="center"><input type="radio" ng-model="item.seleccion" value="bueno" ng-required="!item.seleccion"></td>
+                                            <td align="center"><input type="radio" ng-model="item.seleccion" value="regular" ng-required="!item.seleccion"></td>
+                                            <td align="center"><input type="radio" ng-model="item.seleccion" value="malo" ng-required="!item.seleccion"></td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a ui-sref="dashboard.eval.habilidades" class="btn btn-block btn-info" >
+    							Finalizar <span class="glyphicon glyphicon-circle-arrow-right"></span>
+    						</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+</div>
