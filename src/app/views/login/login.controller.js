@@ -1,8 +1,8 @@
-﻿(function () {
+﻿
     'use strict';
 
     angular
-        .module('app')
+        .module('sbAdminApp')
         .controller('LoginController', LoginController);
 
     LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService'];
@@ -21,7 +21,7 @@
             AuthenticationService.Login(vm.username, vm.password, function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials(vm.username, vm.password);
-                    $location.path('/');
+                    $location.path('/dashboard/home');
                 } else {
                     FlashService.Error(response.message);
                     vm.dataLoading = false;
@@ -29,5 +29,3 @@
             });
         };
     }
-
-})();

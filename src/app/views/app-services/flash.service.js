@@ -1,8 +1,8 @@
-﻿(function () {
+﻿
     'use strict';
 
     angular
-        .module('app')
+        .module('sbAdminApp')
         .factory('FlashService', FlashService);
 
     FlashService.$inject = ['$rootScope'];
@@ -51,4 +51,3 @@
         }
     }
 
-})();

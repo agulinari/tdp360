@@ -22,7 +22,7 @@ angular
       events:true,
     });
 	
-    $urlRouterProvider.otherwise('/dashboard/home');
+    $urlRouterProvider.otherwise('/login');
 
     $stateProvider
       .state('dashboard', {
@@ -75,6 +75,49 @@ angular
             }
         }
     })
+	.state('login', {
+		  url: '/login',
+		  controller: 'LoginController',
+		  templateUrl: 'views/login/login.view.html',
+		  resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load(
+                {
+                  name:'ngCookies',
+                  files:['bower_components/angular-cookies/angular-cookies.js']
+                }),
+			$ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+			  'views/app-services/authentication.service.js',
+			  'views/app-services/flash.service.js',
+			  'views/app-services/user.service.js',
+			  'views/app-services/user.service.local-storage.js',
+              'views/login/login.controller.js',    
+              ]
+            })
+          }
+        }
+	  })
+	  	.state('register', {
+		  url: '/register',
+		  controller: 'RegisterController',
+		  templateUrl: 'views/register/register.view.html',
+		  resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+			return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+			  'views/app-services/flash.service.js',
+			  'views/app-services/user.service.js',
+			  'views/app-services/user.service.local-storage.js',
+              'views/register/register.controller.js',    
+              ]
+            })
+          }
+        }
+	  })
+	  
     .state('usuario',{
         templateUrl:'views/home/home.view.html',
         url:'/empresa'

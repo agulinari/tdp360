@@ -1,12 +1,12 @@
-﻿(function () {
+﻿
     'use strict';
 
     angular
-        .module('app')
-        .factory('UserService', UserService);
+        .module('sbAdminApp')
+        .factory('UserServiceReal', UserServiceReal);
 
-    UserService.$inject = ['$http'];
-    function UserService($http) {
+    UserServiceReal.$inject = ['$http'];
+    function UserServiceReal($http) {
         var service = {};
 
         service.GetAll = GetAll;
@@ -54,5 +54,3 @@
             };
         }
     }
-
-})();
