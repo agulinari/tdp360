@@ -6,13 +6,15 @@
 $ git clone https://github.com/agulinari/tdp360.git
 ```
 
-####2.  Make sure you have [bower](http://bower.io/), [grunt-cli](https://www.npmjs.com/package/grunt-cli) and  [npm](https://www.npmjs.org/) installed globally
+####2.  Make sure you have [bower](http://bower.io/), [mongodb](https://www.mongodb.com/), [grunt-cli](https://www.npmjs.com/package/grunt-cli) and  [npm](https://www.npmjs.org/) installed globally
  
  
 ```sh
 $ sudo apt-get install npm
 $ sudo npm install -g grunt-cli
 $ sudo npm install -g bower
+$ sudo npm install express mongoose body-parser lodash --save
+$ sudo npm install grunt-contrib-watch grunt-express-server grunt-open --save-dev
 ```
 ####3. On the command prompt run the following commands
 

@@ -117,26 +117,54 @@ angular
           }
         }
 	  })
-	  
-    .state('usuario',{
-        templateUrl:'views/home/home.view.html',
-        url:'/empresa'
-    })
-      .state('dashboard.home',{
-        url:'/home',
-        controller: 'MainCtrl',
-        templateUrl:'views/home/home.view.html',
-        resolve: {
-          loadMyFiles:function($ocLazyLoad) {
+        .state('dashboard.employee', {
+            url: '/employee',
+            templateUrl: 'views/employee/employee.view.html',
+            controller: 'EmployeeCtrl',
+            resolve: {
+            loadMyFiles:function($ocLazyLoad) {
             return $ocLazyLoad.load({
               name:'sbAdminApp',
               files:[
-              'views/home/home.controller.js',    
+                'views/app-services/employee.service.js',               
+                'views/employee/employee.controller.js'    
               ]
             })
           }
         }
-      })
+        })
+        .state('dashboard.employee.detail', {
+            url: '^/employee/detail/{employeeId:[0-9]{1,5}}',
+            templateUrl: 'views/employee/detail.view.html',
+            controller: 'EmployeeCtrl',
+            resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                'views/app-services/employee.service.js',               
+                'views/employee/employee.controller.js'    
+              ]
+            })
+          }
+        }
+        })
+        .state('dashboard.employee.detail.subordiantes', {
+            url: '^/employee/detail/subordiantes/{employeeId:[0-9]{1,5}}',
+            templateUrl: 'vies/employee/subordiantes.view.html',
+            controller: 'EmployeeSubsCtrl',
+            resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                'views/app-services/employee.service.js',               
+                'views/employee/subordiantes.controller.js'    
+              ]
+            })
+          }
+        }
+        }) 
         // route to show our basic form (/form)
         .state('dashboard.eval', {
             url: '/eval',

@@ -5,8 +5,8 @@
         .module('sbAdminApp')
         .controller('RegisterController', RegisterController);
 
-    RegisterController.$inject = ['UserService', '$location', '$rootScope', 'FlashService'];
-    function RegisterController(UserService, $location, $rootScope, FlashService) {
+    RegisterController.$inject = ['UserService', '$state', '$rootScope', 'FlashService'];
+    function RegisterController(UserService, $state, $rootScope, FlashService) {
         var vm = this;
 
         vm.register = register;
@@ -17,7 +17,7 @@
                 .then(function (response) {
                     if (response.success) {
                         FlashService.Success('Registration successful', true);
-                        $location.path('/login');
+                        $state.go('login');
                     } else {
                         FlashService.Error(response.message);
                         vm.dataLoading = false;

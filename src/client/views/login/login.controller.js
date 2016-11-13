@@ -5,8 +5,8 @@
         .module('sbAdminApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$location', 'AuthenticationService', 'FlashService'];
-    function LoginController($location, AuthenticationService, FlashService) {
+    LoginController.$inject = ['$state', 'AuthenticationService', 'FlashService'];
+    function LoginController($state, AuthenticationService, FlashService) {
         var vm = this;
 
         vm.login = login;
@@ -21,7 +21,7 @@
             AuthenticationService.Login(vm.username, vm.password, function (response) {
                 if (response.success) {
                     AuthenticationService.SetCredentials(vm.username, vm.password);
-                    $location.path('/dashboard/home');
+                    $state.go('dashboard');
                 } else {
                     FlashService.Error(response.message);
                     vm.dataLoading = false;

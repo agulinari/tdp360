@@ -82,6 +82,11 @@ text-decoration: none;
 background-color: #eee;
 }
 
+.customer-row{
+    border-bottom:1px dashed #bbb; 
+    padding:7px 0px;
+}
+
 /* style.css */
 /* BASIC STYLINGS
 ============================================================================= */

@@ -9,15 +9,16 @@
 
 module.exports = function (grunt) {
 
-  // Load grunt tasks automatically
+    // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+
   // Configurable paths for the application
   var appConfig = {
-    app: require('./bower.json').appPath || 'app',
+    app: require('./bower.json').appPath || 'client',
     dist: 'dist'
   };
 
@@ -60,9 +61,35 @@ module.exports = function (grunt) {
           '.tmp/styles/{,*/}*.css',
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
+      },
+      express: {
+        files: [
+          '<%= yeoman.app %>/{,*/}*.html',
+          '.tmp/styles/{,*/}*.css',
+          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+        ],
+        tasks:  [ 'express:dev' ],
+        options: {
+          spawn: false
+        }
       }
     },
-
+    express: {
+      options: {
+        port: 3000
+      },
+      dev: {
+        options: {
+          script: 'server/server.js',
+          debug: true
+        }
+      }
+    },
+    open: {
+      dev: {
+        path: 'http://localhost:<%= express.options.port%>'
+      }
+    },
     // The actual grunt server settings
     connect: {
       options: {
@@ -364,8 +391,15 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-express-server');
+  grunt.loadNpmTasks('grunt-open');
 
-  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
+
+  grunt.registerTask('serve', [ 'express:dev', 'open:dev', 'watch' ]);
+
+
+  grunt.registerTask('serveOld', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
@@ -377,7 +411,7 @@ module.exports = function (grunt) {
       'connect:livereload',
       'watch'
     ]);
-  });
+  }); 
 
   grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
