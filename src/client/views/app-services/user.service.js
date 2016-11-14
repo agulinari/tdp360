@@ -3,10 +3,10 @@
 
     angular
         .module('sbAdminApp')
-        .factory('UserServiceReal', UserServiceReal);
+        .factory('UserService', UserService);
 
-    UserServiceReal.$inject = ['$http'];
-    function UserServiceReal($http) {
+    UserService.$inject = ['$http'];
+    function UserService($http) {
         var service = {};
 
         service.GetAll = GetAll;
@@ -27,7 +27,7 @@
         }
 
         function GetByUsername(username) {
-            return $http.get('/api/users/' + username).then(handleSuccess, handleError('Error getting user by username'));
+            return $http.get('/api/users/login/' + username).then(handleSuccess, handleError('Error getting user by username'));
         }
 
         function Create(user) {
@@ -45,6 +45,7 @@
         // private functions
 
         function handleSuccess(res) {
+            res.data.success = true;
             return res.data;
         }
 

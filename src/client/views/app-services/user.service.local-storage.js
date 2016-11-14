@@ -3,10 +3,10 @@
 
     angular
         .module('sbAdminApp')
-        .factory('UserService', UserService);
+        .factory('UserServiceMock', UserServiceMock);
 
-    UserService.$inject = ['$timeout', '$filter', '$q'];
-    function UserService($timeout, $filter, $q) {
+    UserServiceMock.$inject = ['$timeout', '$filter', '$q'];
+    function UserServiceMock($timeout, $filter, $q) {
 
         var service = {};
 

@@ -21,7 +21,14 @@ mongoose.connect('mongodb://localhost/simple', function(err) {
     }
 });
 
-// Import routes.js
-require('./routes');
+  server.use('/api/users', require('./api/users'));
+ 
+    // All other routes should redirect to the index.html
+  server.route('/*')
+    .get(function(req, res) {
+      res.sendfile('client/index.html');
+    });
+
+
 // Export module
 exports = module.exports = server;
