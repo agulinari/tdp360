@@ -3,48 +3,48 @@
         <legend>Employee Detail</legend>
 
         <div class="col-lg-3">
-            <img ng-src="{{currentEmployee.Image ? currentEmployee.Image : 'customerimages/default-image.png'}}"
+            <img ng-src="{{currentEmployee.image ? currentEmployee.image : 'customerimages/default-image.png'}}"
                  class="img-circle"
                  alt='employee image' />
         </div>
 
         <div class="col-lg-8">
             <div class="form-group">
-                <label for="inputEmail" class="col-lg-3 control-label">Full Name</label>
+                <label for="inputFullName" class="col-lg-3 control-label">Full Name</label>
                 <div class="col-lg-8">
-                    <input type="text" class="form-control" ng-model="currentEmployee.FullName" disabled>
+                    <input type="text" name="inputFullName" class="form-control" ng-model="currentEmployee.fullName" disabled>
                 </div>
                 <div class="col-lg-1">
-                    <button ng-click="editEmployee(currentEmployee.EmployeeId)" class="btn btn-primary">Edit</button>
+                    <button ng-click="editEmployee(currentEmployee._id)" class="btn btn-primary">Edit</button>
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail" class="col-lg-3 control-label">Address</label>
+                <label for="inputAddess" class="col-lg-3 control-label">Address</label>
                 <div class="col-lg-8">
-                    <input type="text" class="form-control" ng-model="currentEmployee.Address" disabled>
+                    <input type="text" name="inputAddess" class="form-control" ng-model="currentEmployee.address" disabled>
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail" class="col-lg-3 control-label">City</label>
+                <label for="inputCity" class="col-lg-3 control-label">City</label>
                 <div class="col-lg-8">
-                    <input type="text" class="form-control" ng-model="currentEmployee.City" disabled>
+                    <input type="text" name="inputCity" class="form-control" ng-model="currentEmployee.city" disabled>
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail" class="col-lg-3 control-label">Country</label>
+                <label for="inputCountry" class="col-lg-3 control-label">Country</label>
                 <div class="col-lg-8">
-                    <input type="text" class="form-control" ng-model="currentEmployee.Country" disabled>
+                    <input type="text" name="inputCountry" class="form-control" ng-model="currentEmployee.country" disabled>
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputEmail" class="col-lg-3 control-label">Zip Code</label>
+                <label for="inputZipCode" class="col-lg-3 control-label">Zip Code</label>
                 <div class="col-lg-8">
-                    <input type="text" class="form-control" ng-model="currentEmployee.ZipCode" disabled>
+                    <input type="text" name="inputZipCode" class="form-control" ng-model="currentEmployee.zipCode" disabled>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-lg-8 col-lg-offset-3">
-                    <a ui-sref="employee.detail.contact({contactEmployeeId: currentEmployee.EmployeeId})">Contact Detail</a>
+                    <a ui-sref="employee.detail.contact({contactEmployeeId: currentEmployee._id})">Contact Detail</a>
                 </div>
             </div>            
         </div>

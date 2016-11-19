@@ -3,21 +3,19 @@
 angular.module('sbAdminApp')
        .factory('Employee', ['$q', '$http', function ($q, $http) {
 
-    var baseUrl = 'api/customer/';
+    var baseUrl = 'api/employees/';
     var subsBaseUrl = 'api/Contact/';
 
     var employeeService = {};
     employeeService.employees = [];
     employeeService.currentEmployee = {};
 
-    // Search Customers
-    employeeService.search = function (text) {
+    employeeService.Find = function () {
        var deferred = $q.defer();
        return $http({
-           url: baseUrl + 'search',
+           url: baseUrl,
            method: 'GET',
-           params: { 'searchText': text },
-           cache: true
+           cache: false
        }).success(function (data) {
            deferred.resolve(
                employeeService.employees = data);
@@ -27,9 +25,52 @@ angular.module('sbAdminApp')
        return deferred.promise;
     }
 
-   employeeService.employeeDetail = function (id) {
+    // Search Employees
+    employeeService.Search = function (text) {
        var deferred = $q.defer();
-       return $http.get(baseUrl + "detail/" + id)
+       return $http({
+           url: baseUrl + 'search',
+           method: 'GET',
+           params: { 'searchText': text },
+           cache: false
+       }).success(function (data) {
+           deferred.resolve(
+               employeeService.employees = data);
+       }).error(function (error) {
+           deferred.reject(error);
+       })
+       return deferred.promise;
+    }
+
+    // New Employees
+    employeeService.Create = function (employee) {
+       var deferred = $q.defer();
+       return $http.post(baseUrl, employee)
+        .success(function (data) {
+            deferred.resolve(employeeService.employee = data);
+        })
+        .error(function (error) {
+            deferred.reject(error);
+        })
+        return deferred.promise;
+    }
+
+    // Update Employee
+    employeeService.Update = function (employee) {
+        var deferred = $q.defer();
+        return $http.put(baseUrl + employee._id, employee)
+        .success(function (data) {
+            deferred.resolve(employeeService.employee = data);
+        })
+        .error(function (error) {
+            deferred.reject(error);
+        });
+        return deferred.promise;
+    }    
+
+   employeeService.Detail = function (id) {
+       var deferred = $q.defer();
+       return $http.get(baseUrl + id)
             .success(function (data) {
                 deferred.resolve(
                     employeeService.currentEmployee = data);
@@ -40,10 +81,22 @@ angular.module('sbAdminApp')
        return deferred.promise;
     }
 
+    // delete Employees
+    employeeService.Delete = function (id) {
+        var deferred = $q.defer();
+        return $http.delete(baseUrl + id)
+        .success(function (data) {
+             deferred.resolve();
+        })
+        .error(function (error) {
+            deferred.reject(error);
+        })
+        return deferred.promise;
+     }
 
-    employeeService.employeeSubs = function (id) {
+    employeeService.Subs = function (id) {
        var deferred = $q.defer();
-       return $http.get(subsBaseUrl + "ByEmployeeId/" + id)
+       return $http.get(subsBaseUrl + "subs/" + id)
             .success(function (data) {
                 deferred.resolve(employeeService.subs = data);
             }).error(function (error) {

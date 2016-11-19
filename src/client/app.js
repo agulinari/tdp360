@@ -127,14 +127,57 @@ angular
               name:'sbAdminApp',
               files:[
                 'views/app-services/employee.service.js',               
-                'views/employee/employee.controller.js'    
+                'views/employee/employee.controller.js'                        
               ]
             })
           }
         }
         })
+        .state('dashboard.employee.detail.new', {
+          url: '/new',
+          onEnter: ['$stateParams', '$state', '$modal', function($stateParams, $state, $modal) {
+            $modal.open({
+                templateUrl: 'views/employee/employee-modal.view.html',
+                controller: 'EmployeeNewCtrl',
+                resolve: {
+                  loadMyFiles:function($ocLazyLoad) {
+                  return $ocLazyLoad.load({
+                    name:'sbAdminApp',
+                    files:[
+                      'views/employee/employee-new.controller.js'                            
+                    ]
+                  })   
+                  } 
+                }      
+        }).result.finally(function() {
+             $state.go('^',  {}, { reload: 'dashboard.employee'});
+        });
+    }]         
+        })
+        .state('dashboard.employee.detail.edit', {
+          url: '/edit',
+          onEnter: ['$stateParams', '$state', '$modal', function($stateParams, $state, $modal) {
+            $modal.open({
+                templateUrl: 'views/employee/employee-modal.view.html',
+                controller: 'EmployeeEditCtrl',
+                resolve: {
+                  loadMyFiles:function($ocLazyLoad) {
+                  return $ocLazyLoad.load({
+                    name:'sbAdminApp',
+                    files:[
+                      'views/employee/employee-edit.controller.js'                            
+                    ]
+                  })   
+                  } 
+                }      
+        }).result.finally(function() {
+
+            $state.go('^',  {}, { reload: 'dashboard.employee'});
+        });
+    }]         
+        })
         .state('dashboard.employee.detail', {
-            url: '^/employee/detail/{employeeId:[0-9]{1,5}}',
+            url: '/detail/:employeeId',
             templateUrl: 'views/employee/detail.view.html',
             controller: 'EmployeeCtrl',
             resolve: {
@@ -143,15 +186,14 @@ angular
               name:'sbAdminApp',
               files:[
                 'views/app-services/employee.service.js',               
-                'views/employee/employee.controller.js'    
-              ]
+                'views/employee/employee.controller.js'              ]
             })
           }
         }
         })
         .state('dashboard.employee.detail.subordiantes', {
-            url: '^/employee/detail/subordiantes/{employeeId:[0-9]{1,5}}',
-            templateUrl: 'vies/employee/subordiantes.view.html',
+            url: '/subordiantes/:employeeId',
+            templateUrl: 'views/employee/subordiantes.view.html',
             controller: 'EmployeeSubsCtrl',
             resolve: {
             loadMyFiles:function($ocLazyLoad) {
@@ -159,8 +201,7 @@ angular
               name:'sbAdminApp',
               files:[
                 'views/app-services/employee.service.js',               
-                'views/employee/subordiantes.controller.js'    
-              ]
+                'views/employee/subordiantes.controller.js'              ]
             })
           }
         }
