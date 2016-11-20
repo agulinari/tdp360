@@ -12,7 +12,7 @@
             <div class="form-horizontal">
 
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-3 control-label">Full Name</label>
+                    <label for="inputEmail" class="col-lg-3 control-label">Nombre Completo</label>
                     <div class="col-lg-8">
                         <input type="text"
                                class="form-control"
@@ -21,38 +21,50 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-3 control-label">Address</label>
+                    <label for="inputEmail" class="col-lg-3 control-label">Area</label>
                     <div class="col-lg-8">
                         <input type="text"
                                class="form-control"
-                               ng-model="employee.address"
+                               ng-model="employee.area"
+                               ng-change="findJefes()"
                                ng-required="true">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-3 control-label">City</label>
+                    <label for="inputEmail" class="col-lg-3 control-label">Puesto</label>
                     <div class="col-lg-8">
                         <input type="text"
                                class="form-control"
-                               ng-model="employee.city"
+                               ng-model="employee.puesto"
                                ng-required="true">
                     </div>
                 </div>
+
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-3 control-label">Country</label>
+                    <label for="inputEmail" class="col-lg-3 control-label">Responde a</label>
                     <div class="col-lg-8">
-                        <input type="text"
+                        <select class="form-control" ng-model="employee.jefe" ng-options="jefe._id as jefe.fullName for jefe in jefes">
+                              <option value="">Elige un jefe</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail" class="col-lg-3 control-label">Interno</label>
+                    <div class="col-lg-8">
+                        <input type="number"
                                class="form-control"
-                               ng-model="employee.country"
-                               ng-required="true">
+                               ng-model="employee.interno"
+                               ng-required="true"
+                               maxlength="6">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-3 control-label">Zip Code</label>
+                    <label for="inputEmail" class="col-lg-3 control-label">Email</label>
                     <div class="col-lg-8">
-                        <input type="text"
+                        <input type="email"
                                class="form-control"
-                               ng-model="employee.zipCode"
+                               ng-model="employee.email"
                                ng-required="true">
                     </div>
                 </div>
@@ -63,13 +75,13 @@
                     ng-click="save()"
                     ng-disabled="form.$invalid"
                     class="btn btn-success">
-                Save
+                Guardar
             </button>
             <button type="button"
                     ng-click="cancel()"
                     class="btn btn-danger"
                     data-dismiss="modal">
-                Cancel
+                Cancelar
             </button>
 
             <div class="alert-danger" ng-if="error.length > 0 " ng-bind="error"></div>

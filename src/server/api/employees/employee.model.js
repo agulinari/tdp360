@@ -3,11 +3,11 @@ var mongoose = require('mongoose'),
 
 var EmployeeSchema = new Schema({
   fullName: String,
-  address: String,
-  city: String,
-  country: String,
-  zipCode: String,
+  area: String,
+  puesto: String,
+  interno: Number,
   image: String,
+  jefe: String,
   email: String
 });
 

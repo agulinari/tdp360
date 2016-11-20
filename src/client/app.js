@@ -127,7 +127,7 @@ angular
               name:'sbAdminApp',
               files:[
                 'views/app-services/employee.service.js',               
-                'views/employee/employee.controller.js'                        
+                'views/employee/employee.controller.js'                    
               ]
             })
           }

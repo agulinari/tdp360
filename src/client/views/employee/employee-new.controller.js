@@ -5,6 +5,14 @@ app.controller('EmployeeNewCtrl',
 
     $scope.employee = {};
     $scope.headerTitle = 'Add Employee';
+    $scope.jefes = [];
+
+    $scope.findJefes = function(){
+       Employee.Jefes($scope.employee.area)
+                .then(function (data) {
+                    $scope.jefes = Employee.jefes;
+                });
+    }
 
     $scope.save = function () {
             Employee.Create($scope.employee).then(function (response) {

@@ -54,6 +54,22 @@ exports.delete = function(req, res) {
     });
   });
 };
+// Get subordinates
+exports.subs = function(req, res) {
+  Employee.find({ 'jefe' : req.params.id }, function (err, employees) {
+    if(err) { return handleError(res, err); }  
+    return res.status(200).json(employees);
+  });
+};
+
+// Get by area
+exports.area = function(req, res) {
+  Employee.find({ 'area' : req.params.area}, function (err, employees) {
+    if(err) { return handleError(res, err); }  
+    return res.status(200).json(employees);
+  });
+};
+
 // Error function
 function handleError(res, err) {
   return res.status(500).json(err);
