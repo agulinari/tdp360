@@ -206,9 +206,66 @@ angular
           }
         }
         }) 
-        // route to show our basic form (/form)
+
         .state('dashboard.eval', {
             url: '/eval',
+            templateUrl: 'views/eval-admin/eval-admin.view.html',
+            controller: 'EvalAdminCtrl',
+            resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                'views/app-services/eval.service.js',               
+                'views/eval-admin/eval-admin.controller.js'                    
+              ]
+            })
+          }
+        }
+        })
+
+        .state('dashboard.eval.detail', {
+            url: '/detail/:evalId',
+            templateUrl: 'views/eval-admin/detail.view.html',
+            controller: 'EvalAdminCtrl',
+            resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                'views/app-services/eval.service.js',               
+                'views/eval-admin/eval-admin.controller.js'              ]
+            })
+          }
+        }
+        })
+
+        .state('dashboard.eval.detail.new', {
+          url: '/new',
+          onEnter: ['$stateParams', '$state', '$modal', function($stateParams, $state, $modal) {
+            $modal.open({
+                templateUrl: 'views/eval-admin/eval-modal.view.html',
+                controller: 'EvalNewCtrl',
+                resolve: {
+                  loadMyFiles:function($ocLazyLoad) {
+                  return $ocLazyLoad.load({
+                    name:'sbAdminApp',
+                    files:[
+                      'views/eval-admin/eval-new.controller.js'                            
+                    ]
+                  })   
+                  } 
+                }      
+            }).result.finally(function() {
+               $state.go('^',  {}, { reload: 'dashboard.eval'});
+            });
+          }]         
+        })
+
+
+        // route to show our basic form (/form)
+        .state('dashboard.evaluate', {
+            url: '/evaluate',
             templateUrl: 'views/eval/eval.view.html',
             controller: 'EvalCtrl',
                     resolve: {
@@ -226,29 +283,29 @@ angular
         // nested states 
         // each of these sections will have their own view
         // url will be nested (/eval/comunicacion)
-        .state('dashboard.eval.comunicacion', {
+        .state('dashboard.evaluate.comunicacion', {
             url: '/comunicacion',
             templateUrl: 'views/eval/comunicacion/comunicacion.view.html'
         })
         
         // url will be /eval/desempenio
-        .state('dashboard.eval.desempenio', {
+        .state('dashboard.evaluate.desempenio', {
             url: '/desempenio',
             templateUrl: 'views/eval/desempenio/desempenio.view.html'
         })
         
         // url will be /eval/factorhumano
-        .state('dashboard.eval.factorhumano', {
+        .state('dashboard.evaluate.factorhumano', {
             url: '/factorhumano',
             templateUrl: 'views/eval/factorhumano/factorhumano.view.html'
         })
                 // url will be /eval/liderazgo
-        .state('dashboard.eval.liderazgo', {
+        .state('dashboard.evaluate.liderazgo', {
             url: '/liderazgo',
             templateUrl: 'views/eval/liderazgo/liderazgo.view.html'
         })
                 // url will be /eval/habilidades
-        .state('dashboard.eval.habilidades', {
+        .state('dashboard.evaluate.habilidades', {
             url: '/habilidades',
             templateUrl: 'views/eval/habilidades/habilidades.view.html'
         });

@@ -21,10 +21,19 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li ui-sref-active="active">
-                <a ui-sref="dashboard.eval.comunicacion"><i class="fa fa-pencil fa-fw"></i> Evaluaci&oacute;n<span></span></a>
+             <li ng-class="{active: collapseVar==2}">{{dropDown}}
+                <a href="" ng-click="check(2)"><i class="fa fa-pencil fa-fw"></i> Evaluaci&oacute;n<span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=2">
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.eval">Administrar</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.evaluate.comunicacion">Evaluar</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
             </li>
-
             <li ui-sref-active="active">
 
                 <a ui-sref="dashboard.stats"><i class="fa fa-bar-chart-o fa-fw"></i> Estad&iacute;sticas<span></span></a>

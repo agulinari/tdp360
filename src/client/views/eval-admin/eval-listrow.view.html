@@ -1,0 +1,11 @@
+<div class="row">    
+    <div class="col-lg-9">
+        <div style="font-weight:bold;">
+            <a ng-click="evalDetail(eval._id)" style="cursor:pointer">{{eval.titulo}}</a>
+            <span class="pull-right" title="Delete eval">
+                <i ng-click="deleteEval($event, eval._id)" class="glyphicon glyphicon-trash"></i>
+            </span>
+        </div>
+        <div>{{eval.tipo}}</div>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+<div class="modal-content">
+    <form name="form" novalidate>
+        <div class="modal-header">
+            <button type="button" 
+                    class="close" 
+                    ng-click="cancel()"
+                    data-dismiss="modal" 
+                    aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">{{headerTitle}}</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="inputEmail" class="col-lg-3 control-label">T&iacute;tulo</label>
+                    <div class="col-lg-8">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="eval.titulo"
+                               ng-required="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail" class="col-lg-3 control-label">Tipo</label>
+                    <div class="col-lg-8">
+                        <input type="text"
+                               class="form-control"
+                               ng-model="eval.tipo"
+                               ng-required="true">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="item" class="col-lg-3 control-label">Comunicaci&oacute;n</label>
+                    <button  ng-click="addNewItemComunicacion()">Nuevo item</button>
+
+                </div>
+                <div data-ng-repeat="item in eval.comunicacion">
+
+                    <div class="form-group">
+                        <label for="item" class="col-lg-3 control-label">{{item.id}}</label>
+                         <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-required="true" ng-model="item.descripcion" name="" placeholder="Ingresa una descripci&oacute;n">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="item" class="col-lg-3 control-label">Desempeño</label>
+                    <button  ng-click="addNewItemDesempenio()">Nuevo item</button>
+
+                </div>
+                <div data-ng-repeat="item in eval.desempenio">
+
+                    <div class="form-group">
+                        <label for="item" class="col-lg-3 control-label">{{item.id}}</label>
+                         <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-required="true" ng-model="item.descripcion" name="" placeholder="Ingresa una descripci&oacute;n">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="item" class="col-lg-3 control-label">Factor Humano</label>
+                    <button  ng-click="addNewItemFactorHumano()">Nuevo item</button>
+
+                </div>
+                <div data-ng-repeat="item in eval.factorhumano">
+
+                    <div class="form-group">
+                        <label for="item" class="col-lg-3 control-label">{{item.id}}</label>
+                         <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-required="true" ng-model="item.descripcion" name="" placeholder="Ingresa una descripci&oacute;n">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="item" class="col-lg-3 control-label">Liderazgo</label>
+                    <button  ng-click="addNewItemLiderazgo()">Nuevo item</button>
+
+                </div>
+                <div data-ng-repeat="item in eval.liderazgo">
+
+                    <div class="form-group">
+                        <label for="item" class="col-lg-3 control-label">{{item.id}}</label>
+                         <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-required="true" ng-model="item.descripcion" name="" placeholder="Ingresa una descripci&oacute;n">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="item" class="col-lg-3 control-label">Habilidades</label>
+                    <button  ng-click="addNewItemHabilidades()">Nuevo item</button>
+
+                </div>
+                <div data-ng-repeat="item in eval.habilidades">
+
+                    <div class="form-group">
+                        <label for="item" class="col-lg-3 control-label">{{item.id}}</label>
+                         <div class="col-lg-8">
+                            <input type="text" class="form-control" ng-required="true" ng-model="item.descripcion" name="" placeholder="Ingresa una descripci&oacute;n">
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button"
+                    ng-click="save()"
+                    ng-disabled="form.$invalid"
+                    class="btn btn-success">
+                Guardar
+            </button>
+            <button type="button"
+                    ng-click="cancel()"
+                    class="btn btn-danger"
+                    data-dismiss="modal">
+                Cancelar
+            </button>
+
+            <div class="alert-danger" ng-if="error.length > 0 " ng-bind="error"></div>
+
+        </div>
+    </form>
+</div>

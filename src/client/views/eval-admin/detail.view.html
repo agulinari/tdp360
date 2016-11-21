@@ -1,0 +1,85 @@
+<div class="form-horizontal">
+    <fieldset>
+        <legend>Detalle de la Evaluaci&oacute;n</legend>
+        
+        <div class="col-lg-11">
+            <div class="form-group">
+                <label for="inputNombre" class="col-lg-3 control-label">T&iacute;tulo</label>
+                <div class="col-lg-8">
+                    <input type="text" name="inputNombre" class="form-control" ng-model="currentEval.titulo" disabled>
+                </div>    
+            </div>
+            <div class="form-group">
+                <label for="inputTipo" class="col-lg-3 control-label">Tipo</label>
+                <div class="col-lg-8">
+                    <input type="text" name="inputTipo" class="form-control" ng-model="currentEval.tipo" disabled>
+                </div>
+            </div>
+
+                 
+        </div>
+
+
+    </fieldset>
+</div>
+<div class="form-horizontal">
+    <fieldset>
+            <legend>Comunicaci&oacute;n</legend>
+
+            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr ng-repeat="item in currentEval.comunicacion">
+                                            <th>{{item.id}}. {{item.descripcion}}</th>
+                                        </tr>                                       
+                                    </tbody>
+                                </table>
+            </div>  
+
+
+         
+            <legend>Desempeño</legend>
+            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr ng-repeat="item in currentEval.desempenio">
+                                            <th>{{item.id}}. {{item.descripcion}}</th>
+                                        </tr>                                       
+                                    </tbody>
+                                </table>
+            </div>  
+
+            <legend>Factor Humano</legend>
+            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr ng-repeat="item in currentEval.factorhumano">
+                                            <th>{{item.id}}. {{item.descripcion}}</th>
+                                        </tr>                                       
+                                    </tbody>
+                                </table>
+            </div>  
+
+            <legend>Liderazgo</legend>
+            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr ng-repeat="item in currentEval.liderazgo">
+                                            <th>{{item.id}}. {{item.descripcion}}</th>
+                                        </tr>                                       
+                                    </tbody>
+                                </table>
+            </div>  
+
+            <legend>Habilidades</legend>
+            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <tbody>
+                                        <tr ng-repeat="item in currentEval.habilidades">
+                                            <th>{{item.id}}. {{item.descripcion}}</th>
+                                        </tr>                                       
+                                    </tbody>
+                                </table>
+            </div>  
+    </fieldset>
+</div>

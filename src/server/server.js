@@ -23,6 +23,7 @@ mongoose.connect('mongodb://localhost/simple', function(err) {
 
   server.use('/api/users', require('./api/users'));
   server.use('/api/employees', require('./api/employees'));
+  server.use('/api/evals', require('./api/evals'));
  
     // All other routes should redirect to the index.html
   server.route('/*')
