@@ -176,6 +176,31 @@ angular
         });
     }]         
         })
+        .state('dashboard.employee.detail.eval', {
+          url: '/eval/:idEvaluado',
+          onEnter: ['$stateParams', '$state', '$modal', function($stateParams, $state, $modal) {
+            $modal.open({
+                templateUrl: 'views/employee/employee-eval.view.html',
+                controller: 'EmployeeEvalCtrl',
+                resolve: {
+                  loadMyFiles:function($ocLazyLoad) {
+                  return $ocLazyLoad.load({
+                    name:'sbAdminApp',
+                    files:[
+                      'views/app-services/employee.service.js',  
+                      'views/app-services/eval.service.js', 
+                      'views/app-services/instance.service.js',   
+                      'views/employee/employee-eval.controller.js'                            
+                    ]
+                  })   
+                  } 
+                }      
+        }).result.finally(function() {
+
+            $state.go('^',  {}, { reload: 'dashboard.employee'});
+        });
+    }]         
+        })
         .state('dashboard.employee.detail', {
             url: '/detail/:employeeId',
             templateUrl: 'views/employee/detail.view.html',

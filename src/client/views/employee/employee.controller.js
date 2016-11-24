@@ -24,10 +24,12 @@
 
 
             function findJefe(){
-                Employee.Boss($scope.currentEmployee.jefe)
-                .then(function (data) {
-                    $scope.jefe = Employee.boss;
-                });
+                if ($scope.currentEmployee.jefe){
+                    Employee.Boss($scope.currentEmployee.jefe)
+                    .then(function (data) {
+                        $scope.jefe = Employee.boss;
+                    });
+                }
             }
 
             function findSubs(){
@@ -70,6 +72,10 @@
                     })
                 }
             };
+
+            $scope.createEval = function(id){
+                $state.go('dashboard.employee.detail.eval', {idEvaluado : id});
+            }
 
             $scope.employeeDetail = function (id) {
                 if (!id) return;

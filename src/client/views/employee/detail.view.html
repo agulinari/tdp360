@@ -67,7 +67,7 @@
                     <div>{{jefe.area}} - {{jefe.puesto}}</div>
                 </div>
                 <div class="col-lg-3">
-                    <button ng-click="asignarEvaluacion(currentEmployee._id)" class="btn btn-primary">Asignar Evaluaci&oacute;n</button>                
+                    <button ng-click="createEval(jefe._id)" class="btn btn-primary">Crear Evaluaci&oacute;n</button>                
                 </div>
             </div>
             </div>
@@ -83,11 +83,14 @@
                          style="max-width:50px"
                          alt='employee image' />
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-6">
                     <div style="font-weight:bold;">
                         <a ng-click="employeeDetail(sub._id)" style="cursor:pointer">{{sub.fullName}}</a>                   
                     </div>
-                    <div>{{sub.area}} - {{sub.puesto}}</div>
+                    <div>{{sub.area}} - {{sub.puesto}}</div>                    
+                </div>
+                <div class="col-lg-3">
+                    <button ng-click="createEval(sub._id)" class="btn btn-primary">Crear Evaluaci&oacute;n</button>                
                 </div>
             </div>
             </div>
