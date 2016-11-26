@@ -32,7 +32,7 @@ app.controller('EmployeeEvalCtrl',
             var instance = {};
             instance.evaluador = $scope.eval.evaluador._id;
             instance.evaluado = $scope.eval.evaluado._id;
-            instance.evaluacion = $scope.eval._id;
+            instance.eval = $scope.eval._id;
             instance.comunicacion =  [];
             instance.desempenio = [];
             instance.factorhumano = [];

@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 
 var EmployeeSchema = new Schema({
   fullName: String,
+  dni: Number,
   area: String,
   puesto: String,
   interno: Number,

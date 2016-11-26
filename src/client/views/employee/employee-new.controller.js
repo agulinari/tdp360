@@ -6,6 +6,7 @@ app.controller('EmployeeNewCtrl',
     $scope.employee = {};
     $scope.headerTitle = 'Add Employee';
     $scope.jefes = [];
+    $scope.edit = false;
 
     $scope.findJefes = function(){
        Employee.Jefes($scope.employee.area)

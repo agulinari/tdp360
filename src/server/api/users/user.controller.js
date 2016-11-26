@@ -1,6 +1,8 @@
 // Import model
 var User = require('./user.model');
+var Employee = require('../employees/employee.model');
 var _ = require('lodash');
+
 // Get list of Items
 exports.index = function(req, res) {
   User.find(function (err, users) {
@@ -18,6 +20,7 @@ exports.show = function(req, res) {
 };
 // Get a single user
 exports.login = function(req, res) {
+
   User.findOne({username : req.params.username}, function (err, user) {
     if(err) { return handleError(res, err); }
     if(!user) { return res.sendStatus(404); }
@@ -26,10 +29,23 @@ exports.login = function(req, res) {
 };
 // Creates a new user in the DB.
 exports.create = function(req, res) {
-  User.create(req.body, function(err, user) {
-    if(err) { return handleError(res, err); }    
-  	return res.status(201).json(user);
+  Employee.findOne({dni : req.body.dni}, function (err, emp) {
+    if(err) { return handleError(res, err); }
+    if(!emp) { 
+        return res.sendStatus(404); 
+    }else{
+       console.log(emp._id);
+      var newuser = {};
+      newuser.username = req.body.username;
+      newuser.password = req.body.password;
+      newuser.idemployee = emp._id;
+        User.create(newuser, function(err, user) {
+          if(err) { return handleError(res, err); }    
+          return res.status(201).json(user);
+        });      
+    }    
   });
+  
 };
 // Updates an existing user in the DB.
 exports.update = function(req, res) {
@@ -51,7 +67,7 @@ exports.delete = function(req, res) {
     if(!user) { return res.sendStatus(404); }
     user.remove(function(err) {
       if(err) { return handleError(res, err); }
-      //return res.sendStatus(204);
+      return res.sendStatus(204);
     });
   });
 };

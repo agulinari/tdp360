@@ -2,10 +2,62 @@
 
     angular
         .module('sbAdminApp')
-        .controller('EvalCtrl', function($scope) {
+         .directive("asMyeval", function () { return { restrict: 'E', replace: 'true', templateUrl: 'views/eval/eval-listrow.view.html' } })       
+         .controller('EvalCtrl', ['$scope', '$state', '$stateParams', '$modal', '$log', 'Instance', 'Employee', 'Eval', function ($scope, $state, $stateParams, $modal, $log, Instance, Employee, Eval) {
     
             // we will store all of our form data in this object
             $scope.formData = {};
+
+
+            var instanceId = $stateParams.instanceId;
+
+            $scope.searchText = '';
+            $scope.instances = searchInstances();            
+            $scope.currentInstance = null;
+            $scope.evaluado = null;
+                 
+
+            $scope.$watch('searchText', function (newVal, oldVal) {
+            if (newVal != oldVal) {
+                searchInstances();
+            }
+            }, true);
+
+
+            function searchInstances() {
+                //Employee.Search(self.searchText)
+                Instance.Find()
+                .then(function (data) {
+                    var insts = Instance.instances;
+                    insts.forEach(function (inst){
+                        Employee.Detail(inst.evaluado).then(function(data){
+                           inst.evaluado = Employee.currentEmployee;
+                        });
+                        Eval.Detail(inst.eval).then(function(data){
+                           inst.eval = Eval.currentEval;
+                        });                        
+                    });
+                    $scope.instances = insts;
+                });
+            };
+
+
+            $scope.instanceDetail = function (id) {
+                if (!id) return;
+                Instance.Detail(id).then(function (data) {
+                    var inst = Instance.currentInstance;
+                    Employee.Detail(inst.evaluado).then(function(data){
+                        $scope.currentInstance = Instance.currentInstance;                                        
+                        $scope.evaluado = Employee.currentEmployee;
+                        $state.go('dashboard.evaluate.detail.comunicacion', { 'instanceId': id });
+                    });
+                });
+
+            };
+                /* Need to call after defining the function
+               It will be called on page refresh        */
+            $scope.currentInstance = $scope.instanceDetail(instanceId);    
+
 
             $scope.comunicacion =  [
                                     { id: 1 , descripcion: 'Su forma de comunicación es permanente', seleccion: ''},
@@ -52,10 +104,13 @@
                                     { id: 5, descripcion: 'Manejo de conflictos', seleccion: ''}
                                   ];
 
+
+
+
             // function to process the form
             $scope.processForm = function() {
                 alert('awesome!');
             };
     
-        });
+        }]);
     

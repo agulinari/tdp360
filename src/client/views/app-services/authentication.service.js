@@ -12,6 +12,7 @@
         service.Login = Login;
         service.SetCredentials = SetCredentials;
         service.ClearCredentials = ClearCredentials;
+        service.GetCredentials = GetCredentials;
 
         return service;
 
@@ -24,7 +25,7 @@
                 UserService.GetByUsername(username)
                     .then(function (user) {
                         if (user !== null && user.password === password) {
-                            response = { success: true };
+                            response = { success: true , user: user};
                         } else {
                             response = { success: false, message: 'Username or password is incorrect' };
                         }
@@ -41,12 +42,13 @@
 
         }
 
-        function SetCredentials(username, password) {
+        function SetCredentials(username, password, idemployee) {
             var authdata = Base64.encode(username + ':' + password);
 
             $rootScope.globals = {
                 currentUser: {
                     username: username,
+                    idemployee: idemployee,
                     authdata: authdata
                 }
             };
@@ -59,6 +61,10 @@
             $rootScope.globals = {};
             $cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic';
+        }
+
+        function GetCredentials(){
+            return $cookieStore.get('globals').currentUser;   
         }
     }
 

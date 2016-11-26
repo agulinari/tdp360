@@ -5,42 +5,26 @@
             <li ui-sref-active="active">
                 <a ui-sref="dashboard.home"><i class="fa fa-home fa-fw"></i> Home</a>
             </li>
-            <li ng-class="{active: collapseVar==1}">{{dropDown}}
-                <a href="" ng-click="check(1)"><i class="fa fa-building fa-fw"></i> Empresa<span
+            <li ui-sref-active="active" ng-show="show('0')">
+                <a ui-sref="dashboard.employee"><i class="fa fa-user fa-fw"></i> Usuario</a>
+            </li>
+             <li ng-class="{active: collapseVar==1}">{{dropDown}}
+                <a href="" ng-click="check(1)"><i class="fa fa-pencil fa-fw"></i> Evaluaci&oacute;n<span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=1">
-                    <li ui-sref-active="active">
-                        <a ui-sref="empresa.alta">Alta</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="empresa.baja">Baja</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="empresa.modificar">Modificar</a>
-                    </li>                    
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-             <li ng-class="{active: collapseVar==2}">{{dropDown}}
-                <a href="" ng-click="check(2)"><i class="fa fa-pencil fa-fw"></i> Evaluaci&oacute;n<span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=2">
-                    <li ui-sref-active="active">
+                    <li ui-sref-active="active" ng-show="show('0')">
                         <a ui-sref="dashboard.eval">Administrar</a>
                     </li>
                     <li ui-sref-active="active">
-                        <a ui-sref="dashboard.evaluate.comunicacion">Evaluar</a>
+                        <a ui-sref="dashboard.evaluate">Mis Evaluaciones</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li ui-sref-active="active">
+            <li ui-sref-active="active" ng-show="show(0)">
 
                 <a ui-sref="dashboard.stats"><i class="fa fa-bar-chart-o fa-fw"></i> Estad&iacute;sticas<span></span></a>
 
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="dashboard.employee"><i class="fa fa-user fa-fw"></i> Usuario</a>
             </li>
           
         </ul>

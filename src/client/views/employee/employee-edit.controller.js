@@ -5,6 +5,7 @@ app.controller('EmployeeEditCtrl',
 
     $scope.employee = Employee.currentEmployee;
     $scope.headerTitle = 'Edit Employee';
+    $scope.edit = true;
 
     $scope.jefes = findJefes();
 

@@ -30,32 +30,32 @@ angular
         templateUrl: 'views/home/main.html',
         resolve: {
             loadMyDirectives:function($ocLazyLoad){
-                return $ocLazyLoad.load(
+                return  $ocLazyLoad.load(
+                {
+                  name:'ngCookies',
+                  files:['bower_components/angular-cookies/angular-cookies.js']
+                }),
+                $ocLazyLoad.load(
                 {
                     name:'sbAdminApp',
-                    files:[
+                    files:[                    
                     'views/header/header.js',
                     'views/header/header-notification/header-notification.js',
                     'views/sidebar/sidebar.js',
                     'views/sidebar/sidebar-search/sidebar-search.js'
                     ]
-                }),
+                })
                 $ocLazyLoad.load(
                 {
                    name:'toggle-switch',
                    files:["bower_components/angular-toggle-switch/angular-toggle-switch.min.js",
                           "bower_components/angular-toggle-switch/angular-toggle-switch.css"
                       ]
-                }),
+                })
                 $ocLazyLoad.load(
                 {
                   name:'ngAnimate',
                   files:['bower_components/angular-animate/angular-animate.js']
-                })
-                $ocLazyLoad.load(
-                {
-                  name:'ngCookies',
-                  files:['bower_components/angular-cookies/angular-cookies.js']
                 })
                 $ocLazyLoad.load(
                 {
@@ -259,7 +259,8 @@ angular
               name:'sbAdminApp',
               files:[
                 'views/app-services/eval.service.js',               
-                'views/eval-admin/eval-admin.controller.js'              ]
+                'views/eval-admin/eval-admin.controller.js'              
+              ]
             })
           }
         }
@@ -291,14 +292,33 @@ angular
         // route to show our basic form (/form)
         .state('dashboard.evaluate', {
             url: '/evaluate',
-            templateUrl: 'views/eval/eval.view.html',
+            templateUrl: 'views/eval/evalmain.view.html',
             controller: 'EvalCtrl',
                     resolve: {
           loadMyFiles:function($ocLazyLoad) {
             return $ocLazyLoad.load({
               name:'sbAdminApp',
               files:[
+               'views/app-services/eval.service.js',   
+               'views/app-services/instance.service.js',   
+                'views/app-services/employee.service.js',   
               'views/eval/eval.controller.js',    
+              ]
+            })
+          }
+        }
+        })
+        .state('dashboard.evaluate.detail', {
+            url: '/detail/:instanceId',
+            templateUrl: 'views/eval/eval.view.html',
+            controller: 'EvalCtrl',
+            resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                'views/app-services/eval.service.js',          
+                'views/eval-admin/eval-admin.controller.js' 
               ]
             })
           }
@@ -308,29 +328,29 @@ angular
         // nested states 
         // each of these sections will have their own view
         // url will be nested (/eval/comunicacion)
-        .state('dashboard.evaluate.comunicacion', {
+        .state('dashboard.evaluate.detail.comunicacion', {
             url: '/comunicacion',
             templateUrl: 'views/eval/comunicacion/comunicacion.view.html'
         })
         
         // url will be /eval/desempenio
-        .state('dashboard.evaluate.desempenio', {
+        .state('dashboard.evaluate.detail.desempenio', {
             url: '/desempenio',
             templateUrl: 'views/eval/desempenio/desempenio.view.html'
         })
         
         // url will be /eval/factorhumano
-        .state('dashboard.evaluate.factorhumano', {
+        .state('dashboard.evaluate.detail.factorhumano', {
             url: '/factorhumano',
             templateUrl: 'views/eval/factorhumano/factorhumano.view.html'
         })
                 // url will be /eval/liderazgo
-        .state('dashboard.evaluate.liderazgo', {
+        .state('dashboard.evaluate.detail.liderazgo', {
             url: '/liderazgo',
             templateUrl: 'views/eval/liderazgo/liderazgo.view.html'
         })
                 // url will be /eval/habilidades
-        .state('dashboard.evaluate.habilidades', {
+        .state('dashboard.evaluate.detail.habilidades', {
             url: '/habilidades',
             templateUrl: 'views/eval/habilidades/habilidades.view.html'
         });

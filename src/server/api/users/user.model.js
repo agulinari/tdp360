@@ -2,8 +2,11 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-  firstName: String,
-  lastName: String,
+  idemployee: {
+    type: String,
+    required: true,
+    unique: true
+  },
   username: {
   	type: String,
   	required: true,
@@ -15,4 +18,11 @@ var UserSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('User', UserSchema);
+var User =  mongoose.model('User', UserSchema);
+var admin = { 'username' : 'admin',  'password' : 'admin', 'idemployee' : '0' };
+User.create(admin, function(error, doc) {
+  // default admin
+  console.log(doc);
+});
+
+module.exports = User;

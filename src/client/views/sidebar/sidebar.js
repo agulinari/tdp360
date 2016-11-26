@@ -8,17 +8,18 @@
  */
 
 angular.module('sbAdminApp')
-  .directive('sidebar',['$location',function() {
+  .directive('sidebar', function() {
     return {
       templateUrl:'views/sidebar/sidebar.html',
       restrict: 'E',
       replace: true,
       scope: {
       },
-      controller:function($scope){
+      controller:['$scope', '$cookieStore', function($scope, $cookieStore){
         $scope.selectedMenu = 'dashboard';
         $scope.collapseVar = 0;
         $scope.multiCollapseVar = 0;
+        $scope.idemployee = $cookieStore.get('globals').currentUser.idemployee;
         
         $scope.check = function(x){
           
@@ -35,6 +36,13 @@ angular.module('sbAdminApp')
           else
             $scope.multiCollapseVar = y;
         };
-      }
+
+        $scope.show = function(role){
+          if (role === $scope.idemployee){
+            return true;
+          }
+          return false;
+        };
+      }]
     }
-  }]);
+  });
