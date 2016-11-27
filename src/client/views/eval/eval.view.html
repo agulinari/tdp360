@@ -4,10 +4,39 @@
 
          <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Evaluaci&oacute;n de Desempeño</h1>
+                    <h1 class="page-header">{{currentInstance.eval.titulo}}</h1>
                 </div>
                 <!-- /.col-lg-12 -->
-     
+
+                 <div class="col-lg-4">
+            <img ng-src="{{currentInstance.evaluado.image ? currentInstance.evaluado.image : 'images/default-image.png'}}"
+                 class="img-circle"
+                 alt='employee image' />
+        </div>
+        <div class=" col-md-7 col-lg-7"> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td><b>Evaluado:</b></td>
+                        <td>{{currentInstance.evaluado.fullName}}</td>
+                      </tr>
+                      <tr>
+                        <td><b>DNI:</b></td>
+                        <td>{{currentInstance.evaluado.dni}}</td>
+                      </tr>
+                      <tr>
+                        <td><b>Area:</b></td>
+                        <td>{{currentInstance.evaluado.area}}</td>
+                      </tr>
+                     <tr>
+                        <td><b>Puesto:</b></td>
+                        <td>{{currentInstance.evaluado.puesto}}</td>
+                      </tr>                     
+                    </tbody>
+                  </table>
+ 
+        </div>
+       </div>
             <!-- the links to our nested states using relative paths -->
             <!-- add the active class if the state matches our ui-sref -->
             <div id="status-buttons" class="text-center">
@@ -17,7 +46,7 @@
                 <a ui-sref-active="active" ui-sref=".liderazgo"><span></span> Liderazgo</a>
                 <a ui-sref-active="active" ui-sref=".habilidades"><span></span> Habilidades</a>
             </div>
-        </div>
+        
         
         <!-- use ng-submit to catch the form submission and use our Angular function -->
         <form id="eval-form" ng-submit="processForm()">

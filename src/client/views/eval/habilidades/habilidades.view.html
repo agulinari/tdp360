@@ -26,7 +26,7 @@
                                     </thead>
                                     <tbody>
 
-                                        <tr ng-repeat="item in habilidades">
+                                        <tr ng-repeat="item in currentInstance.eval.habilidades">
                                             <th>{{item.descripcion}}</th>
                                             <td align="center"><input type="radio" ng-model="item.seleccion" value="excelente" ng-required="!item.seleccion"></td>
                                             <td align="center"><input type="radio" ng-model="item.seleccion" value="bueno" ng-required="!item.seleccion"></td>

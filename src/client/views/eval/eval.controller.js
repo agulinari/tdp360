@@ -13,7 +13,7 @@
 
             $scope.searchText = '';
             $scope.instances = searchInstances();            
-            $scope.currentInstance = null;
+            //$scope.currentInstance = null;
             $scope.evaluado = null;
                  
 
@@ -42,21 +42,14 @@
             };
 
 
-            $scope.instanceDetail = function (id) {
-                if (!id) return;
-                Instance.Detail(id).then(function (data) {
-                    var inst = Instance.currentInstance;
-                    Employee.Detail(inst.evaluado).then(function(data){
-                        $scope.currentInstance = Instance.currentInstance;                                        
-                        $scope.evaluado = Employee.currentEmployee;
-                        $state.go('dashboard.evaluate.detail.comunicacion', { 'instanceId': id });
-                    });
-                });
-
+            $scope.instanceDetail = function (instance) {
+                if (!instance) return;
+                    $scope.currentInstance = instance;   
+                    $state.go('dashboard.evaluate.detail.comunicacion', { 'instanceId': instance._id });
             };
                 /* Need to call after defining the function
                It will be called on page refresh        */
-            $scope.currentInstance = $scope.instanceDetail(instanceId);    
+            //$scope.currentInstance = $scope.instanceDetail(instanceId);    
 
 
             $scope.comunicacion =  [
