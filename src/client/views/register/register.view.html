@@ -5,17 +5,20 @@
         <div class="form-group" ng-class="{ 'has-error': form.dni.$dirty && form.dni.$error.required }">
             <label for="dni">DNI</label>
             <input type="text" name="dni" id="dni" class="form-control" ng-model="vm.user.dni" required />
-            <span ng-show="form.dni.$dirty && form.dni.$error.required" class="help-block">Dni is required</span>
+            <span ng-show="form.dni.$dirty && form.dni.$error.required" class="help-block">Dni es requerido</span>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
             <label for="username">Username</label>
             <input type="text" name="username" id="username" class="form-control" ng-model="vm.user.username" required />
-            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username es requerido</span>
         </div>
         <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
             <label for="password">Password</label>
             <input type="password" name="password" id="password" class="form-control" ng-model="vm.user.password" required />
-            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password es requerido</span>
+        </div>
+        <div ng-show="vm.error" class="alert alert-danger">
+            <strong>Error!</strong> El dni ingresado no corresponde a un empleado.
         </div>
         <div class="form-actions">
             <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Register</button>

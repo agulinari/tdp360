@@ -10,6 +10,7 @@
         var vm = this;
 
         vm.login = login;
+        vm.error = false;
 
         (function initController() {
             // reset login status
@@ -23,7 +24,9 @@
                     AuthenticationService.SetCredentials(vm.username, vm.password, response.user.idemployee);
                     $state.go('dashboard.home');
                 } else {
+                    vm.error = true;
                     FlashService.Error(response.message);
+
                     vm.dataLoading = false;
                 }
             });

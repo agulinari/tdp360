@@ -8,7 +8,7 @@
     RegisterController.$inject = ['UserService', '$state', '$rootScope', 'FlashService'];
     function RegisterController(UserService, $state, $rootScope, FlashService) {
         var vm = this;
-
+        vm.error = false;
         vm.register = register;
 
         function register() {
@@ -19,6 +19,7 @@
                         FlashService.Success('Registration successful', true);
                         $state.go('login');
                     } else {
+                        vm.error = true;
                         FlashService.Error(response.message);
                         vm.dataLoading = false;
                     }
