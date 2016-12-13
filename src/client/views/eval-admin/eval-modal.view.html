@@ -12,21 +12,25 @@
             <div class="form-horizontal">
 
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-3 control-label">T&iacute;tulo</label>
-                    <div class="col-lg-8">
+                    <label for="inputTitulo" class="col-lg-3 control-label">T&iacute;tulo</label>
+                    <div class="col-lg-8" ng-class="{ 'has-error': form.inputTitulo.$dirty && form.inputTitulo.$invalid }">
                         <input type="text"
+                               name="inputTitulo"
                                class="form-control"
                                ng-model="eval.titulo"
                                ng-required="true">
+                        <span ng-show="form.inputTitulo.$dirty && form.inputTitulo.$error.required" class="help-block">Este campo es requerido</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-3 control-label">Tipo</label>
-                    <div class="col-lg-8">
+                    <label for="inputTipo" class="col-lg-3 control-label">Tipo</label>
+                    <div class="col-lg-8" ng-class="{ 'has-error': form.inputTipo.$dirty && form.inputTipo.$invalid }">
                         <input type="text"
+                               name="inputTipo"
                                class="form-control"
                                ng-model="eval.tipo"
                                ng-required="true">
+                        <span ng-show="form.inputTipo.$dirty && form.inputTipo.$error.required" class="help-block">Este campo es requerido</span>
                     </div>
                 </div>
 

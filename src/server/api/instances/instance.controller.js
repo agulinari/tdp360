@@ -17,6 +17,15 @@ exports.show = function(req, res) {
   });
 };
 
+exports.search = function(req, res) {
+  Instance.find({ 'evaluador' : req.params.id }).
+  where('status').ne('F').
+  exec(function (err, instances) {
+    if(err) { return handleError(res, err); }  
+    return res.status(200).json(instances);
+  });
+};
+
 // Creates a new instances in the DB.
 exports.create = function(req, res) {
   Instance.create(req.body, function(err, instances) {

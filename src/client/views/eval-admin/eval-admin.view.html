@@ -2,11 +2,7 @@
     <div class="col-lg-10">
         <h1>Administrar Evaluaciones</h1>  
     </div>
-    <div class="col-lg-2">
-        <button ng-click="addEval()" class="btn btn-success btn-lg">
-            <i class="glyphicon glyphicon-plus"></i> Nueva Evaluacion
-        </button>
-    </div>
+
 </div>
 <div class="row">
     <div class="col-lg-3" style="border: 1px solid #ddd;border-radius: 4px; overflow-y:hidden">
@@ -14,7 +10,7 @@
         <legend>Buscar Evaluaciones</legend>
         <div class="input-group">
             <input type="text"
-                   ng-model="searchText"
+                   ng-model="search.titulo"
                    class="form-control"
                    placeholder="Enter search text">
             <span class="input-group-addon" id="basic-addon1">
@@ -22,9 +18,13 @@
             </span>
         </div>
 
-        <div class="col-lg-12 customer-row animate" ng-repeat="eval in evals">
+        <div class="col-lg-12 customer-row animate" ng-repeat="eval in evals | filter : search">
             <as-eval></as-eval>
         </div>
+
+        <button ng-click="addEval()" class="btn btn-primary btn-block top-buffer">
+            <i class="glyphicon glyphicon-plus"></i> Nueva Evaluacion
+        </button>
     </div>
     <div class="col-lg-9" style="border: 1px solid #ddd;border-radius: 4px; overflow-y:auto">
         <div ui-view></div>

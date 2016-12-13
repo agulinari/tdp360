@@ -5,6 +5,7 @@ var InstanceSchema = new Schema({
   evaluador: String,
   evaluado: String,
   eval: String,
+  status: String,
   comunicacion: [{
   					puntaje: Number
   				}],

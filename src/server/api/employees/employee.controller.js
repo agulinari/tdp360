@@ -17,8 +17,11 @@ exports.show = function(req, res) {
   });
 };
 // Get a single employee
-exports.search = function(req, res) {
-  Employee.find({ 'fullName' : new RegExp('^'+req.params.searchText+'$', "i")}, function (err, employees) {
+exports.filtrar = function(req, res) {
+  var regex = new RegExp(req.params.text, "i"),
+      query = { 'fullName' : regex };
+
+  Employee.find('query', function (err, employees) {
     if(err) { return handleError(res, err); }  
     return res.json(employees);
   });

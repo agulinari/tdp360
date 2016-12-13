@@ -12,44 +12,58 @@
             <div class="form-horizontal">
 
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-3 control-label">Nombre Completo</label>
-                    <div class="col-lg-8">
+                    <label for="inputNombre" class="col-lg-3 control-label">Nombre Completo</label>
+                    <div class="col-lg-8" ng-class="{ 'has-error': form.inputNombre.$dirty && form.inputNombre.$invalid }">
                         <input type="text"
+                               name="inputNombre"
                                class="form-control"
                                ng-model="employee.fullName"
                                ng-required="true"
                                ng-disabled="edit">
+                        <span ng-show="form.inputNombre.$dirty && form.inputNombre.$error.required" class="help-block">Este campo es requerido</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-3 control-label">DNI</label>
-                    <div class="col-lg-8">
+                    <label for="inputDni" class="col-lg-3 control-label">DNI</label>
+                    <div class="col-lg-8" ng-class="{ 'has-error': form.inputDni.$dirty && form.inputDni.$invalid }">
                         <input type="number"
+                               name="inputDni"
                                class="form-control"
                                ng-model="employee.dni"
                                ng-required="true"
                                maxlength="9"
                                ng-disabled="edit">
+                        <span ng-show="form.inputDni.$dirty && form.inputDni.$error.required" class="help-block">Este campo es requerido</span>
+                        <span ng-show="form.inputDni.$dirty && form.inputDni.$error.number" class="help-block">No es un dni valido</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-3 control-label">Area</label>
-                    <div class="col-lg-8">
-                        <input type="text"
-                               class="form-control"
-                               ng-model="employee.area"
-                               ng-change="findJefes()"
-                               ng-required="true">
+                    <label for="inputArea" class="col-lg-3 control-label">Area</label>
+                    <div class="col-lg-8" ng-class="{ 'has-error': form.inputArea.$dirty && form.inputArea.$invalid }">                        
+                        <select  name="inputArea" class="form-control" ng-model="employee.area" ng-change="findJefes()"  ng-required="true">
+                              <option value="RRHH">Recursos Humanos</option>
+                              <option value="Tecnologia">Tecnologia</option>
+                              <option value="Operaciones">Operaciones</option>
+                              <option value="Sistemas">Sistemas</option>
+                              <option value="Marketing">Marketing</option>
+                              <option value="Comercial">Comercial</option>
+                              <option value="Ventas">Ventas</option>
+                              <option value="Finanzas">Finanzas</option>
+                        </select>
+                        <span ng-show="form.inputArea.$dirty && form.inputArea.$error.required" class="help-block">Este campo es requerido</span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="inputEmail" class="col-lg-3 control-label">Puesto</label>
+                <div class="form-group" ng-class="{ 'has-error': form.inputPuesto.$dirty && form.inputPuesto.$invalid }">
+                    <label for="inputPuesto" class="col-lg-3 control-label">Puesto</label>
                     <div class="col-lg-8">
                         <input type="text"
+                               name="inputPuesto"
                                class="form-control"
                                ng-model="employee.puesto"
                                ng-required="true">
+                        <span ng-show="form.inputPuesto.$dirty && form.inputPuesto.$error.required" class="help-block">Este campo es requerido</span>                        
                     </div>
+
                 </div>
 
                 <div class="form-group">
@@ -62,22 +76,28 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputEmail" class="col-lg-3 control-label">Interno</label>
-                    <div class="col-lg-8">
+                    <label for="inputInterno" class="col-lg-3 control-label">Interno</label>
+                    <div class="col-lg-8"  ng-class="{ 'has-error': form.inputInterno.$dirty && form.inputInterno.$invalid }">
                         <input type="number"
+                               name = "inputInterno"
                                class="form-control"
                                ng-model="employee.interno"
                                ng-required="true"
                                maxlength="6">
+                        <span ng-show="form.inputInterno.$dirty && form.inputInterno.$error.required" class="help-block">Este campo es requerido</span>
+                        <span ng-show="form.inputInterno.$dirty && form.inputInterno.$error.number" class="help-block">No es un interno valido</span>                  
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEmail" class="col-lg-3 control-label">Email</label>
-                    <div class="col-lg-8">
+                    <div class="col-lg-8" ng-class="{ 'has-error': form.inputEmail.$dirty && form.inputEmail.$invalid }">
                         <input type="email"
+                               name="inputEmail"
                                class="form-control"
                                ng-model="employee.email"
                                ng-required="true">
+                        <span ng-show="form.inputEmail.$dirty && form.inputEmail.$error.required" class="help-block">Este campo es requerido</span>
+                        <span ng-show="form.inputEmail.$dirty && form.inputEmail.$error.email" class="help-block">No es un email valido</span>
                     </div>
                 </div>
             </div>

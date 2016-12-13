@@ -23,6 +23,10 @@ body {
   padding-bottom: 19px;
 }
 
+.top-buffer {
+    margin-top:10px;
+}
+
 /* Custom page footer */
 .footer {
   padding-top: 19px;
@@ -108,7 +112,7 @@ body                            { padding-top:20px; }
     border-radius:50%; }
 
 /* active buttons turn light green-blue*/
-#status-buttons a.active span   { background:#428bca; }
+#status-buttons a.active span   { background:#da2626; }
 
 
 /* ANIMATION STYLINGS

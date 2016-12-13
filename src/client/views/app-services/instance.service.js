@@ -24,6 +24,19 @@ angular.module('sbAdminApp')
        return deferred.promise;
     }
 
+    instanceService.Search = function (id) {
+       var deferred = $q.defer();
+       return $http.get(baseUrl + 'search/' + id)
+            .success(function (data) {
+                deferred.resolve(
+                     instanceService.instances = data);
+            })
+       .error(function (error) {
+           deferred.reject(error);
+       })
+       return deferred.promise;
+    }
+
     // New Instance
     instanceService.Create = function (instance) {
        var deferred = $q.defer();

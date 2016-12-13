@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 /**
  * @ngdoc overview
  * @name sbAdminApp
@@ -117,6 +117,49 @@ angular
           }
         }
 	  })
+       .state('dashboard.home',{
+        url:'/home',
+        controller: 'HomeCtrl',
+        templateUrl:'views/home/home.view.html',
+        resolve: {
+          loadMyFiles:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+              'views/home/home.controller.js'
+              /*'scripts/controllers/main.js',
+              'scripts/directives/timeline/timeline.js',
+              'scripts/directives/notifications/notifications.js',
+              'scripts/directives/chat/chat.js',
+              'scripts/directives/dashboard/stats/stats.js'*/
+              ]
+            })
+          }
+        }
+      })
+      .state('dashboard.stats', {
+            url: '/stats',
+            templateUrl: 'views/stats/stats.view.html',
+            controller: 'StatsCtrl',
+            resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+             return $ocLazyLoad.load({
+              name:'chart.js',
+              files:[
+                'bower_components/angular-chart.js/dist/angular-chart.min.js',
+                'bower_components/angular-chart.js/dist/angular-chart.css'
+              ]
+            }),
+            $ocLazyLoad.load({
+              name:'sbAdminApp',
+              files:[
+                'views/app-services/stats.service.js',               
+                'views/stats/stats.controller.js'                    
+              ]
+            })
+          }
+        }
+        })
         .state('dashboard.employee', {
             url: '/employee',
             templateUrl: 'views/employee/employee.view.html',
@@ -353,6 +396,11 @@ angular
         .state('dashboard.evaluate.detail.habilidades', {
             url: '/habilidades',
             templateUrl: 'views/eval/habilidades/habilidades.view.html'
+        })
+                        // url will be /eval/comentarios
+        .state('dashboard.evaluate.detail.comentarios', {
+            url: '/comentarios',
+            templateUrl: 'views/eval/comentarios/comentarios.view.html'
         });
 
   }]);

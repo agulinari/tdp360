@@ -2,8 +2,15 @@
 
     angular
         .module('sbAdminApp')
-         .directive("asMyeval", function () { return { restrict: 'E', replace: 'true', templateUrl: 'views/eval/eval-listrow.view.html' } })       
-         .controller('EvalCtrl', ['$scope', '$state', '$stateParams', '$modal', '$log', 'Instance', 'Employee', 'Eval', function ($scope, $state, $stateParams, $modal, $log, Instance, Employee, Eval) {
+         .directive("asMyeval", function () { return { restrict: 'E', replace: 'true', templateUrl: 'views/eval/eval-listrow.view.html' } })
+          .controller('ModalInstanceCtrl', ['$scope', '$modalInstance', 'data', '$state', function ($scope, $modalInstance, data, $state) {
+              $scope.data = data;
+              $scope.close = function(/*result*/){
+                $modalInstance.close($scope.data);
+                $state.go('dashboard.evaluate');
+              };
+            }])   
+         .controller('EvalCtrl', ['$scope', '$cookieStore', '$state', '$stateParams', '$modal', '$log', 'Instance', 'Employee', 'Eval', function ($scope, $cookieStore, $state, $stateParams, $modal, $log, Instance, Employee, Eval) {
     
             // we will store all of our form data in this object
             $scope.formData = {};
@@ -11,22 +18,15 @@
 
             var instanceId = $stateParams.instanceId;
 
-            $scope.searchText = '';
             $scope.instances = searchInstances();            
             //$scope.currentInstance = null;
             $scope.evaluado = null;
-                 
-
-            $scope.$watch('searchText', function (newVal, oldVal) {
-            if (newVal != oldVal) {
-                searchInstances();
-            }
-            }, true);
-
-
+           
             function searchInstances() {
                 //Employee.Search(self.searchText)
-                Instance.Find()
+                var idemployee = $cookieStore.get('globals').currentUser.idemployee;
+   
+                Instance.Search(idemployee)
                 .then(function (data) {
                     var insts = Instance.instances;
                     insts.forEach(function (inst){
@@ -38,6 +38,11 @@
                         });                        
                     });
                     $scope.instances = insts;
+                    angular.forEach($scope.instances, function(value, key){
+                        if (value._id === instanceId){
+                            $scope.currentInstance = value;
+                        }
+                    });
                 });
             };
 
@@ -51,59 +56,174 @@
                It will be called on page refresh        */
             //$scope.currentInstance = $scope.instanceDetail(instanceId);    
 
-
-            $scope.comunicacion =  [
-                                    { id: 1 , descripcion: 'Su forma de comunicación es permanente', seleccion: ''},
-                                    { id: 2, descripcion: 'Se comunica de forma clara y objetiva', seleccion: ''},
-                                    { id: 3, descripcion: 'Se comunica cuando requiere', seleccion: ''},
-                                    { id: 4, descripcion: 'Se comunica bien en equipo', seleccion: ''}
-                                  ];
-    
-
-
-            $scope.desempenio =  [
-                                    { id: 1 , descripcion: 'En todo su equipo se aprecia un buen ambiente', seleccion: ''},
-                                    { id: 2, descripcion: 'Fomenta el trabajo en equipo', seleccion: ''},
-                                    { id: 3, descripcion: 'Realiza juntas de equipo conjuntas', seleccion: ''},
-                                    { id: 4, descripcion: 'Apoya a su equipo de trabajo', seleccion: ''},
-                                    { id: 5, descripcion: 'Propone nuevos cambios', seleccion: ''}
-                                  ];
-
-
-
-            $scope.factorhumano =  [
-                                    { id: 1 , descripcion: 'Deja a su equipo laburar tarde', seleccion: ''},
-                                    { id: 2, descripcion: 'Delega actividades', seleccion: ''},
-                                    { id: 3, descripcion: 'Recluta el personal adecuado', seleccion: ''},
-                                    { id: 4, descripcion: 'Consigue una colaboración activa', seleccion: ''},
-                                    { id: 5, descripcion: 'Capacidad analítica', seleccion: ''}
-                                  ];
-
-
-            $scope.liderazgo =  [
-                                    { id: 1 , descripcion: 'Tiene iniciativa de cambio', seleccion: ''},
-                                    { id: 2, descripcion: 'Es una fuente de inspiración', seleccion: ''},
-                                    { id: 3, descripcion: 'Fomenta la participación', seleccion: ''},
-                                    { id: 4, descripcion: 'Cuenta con el apoyo del equipo', seleccion: ''},
-                                    { id: 5, descripcion: 'Representa bien al área', seleccion: ''}
-                                  ];
-
-
-            $scope.habilidades =  [
-                                    { id: 1 , descripcion: 'Cuenta con iniciativa', seleccion: ''},
-                                    { id: 2, descripcion: 'Tiene creatividad', seleccion: ''},
-                                    { id: 3, descripcion: 'Es adaptable al cambio', seleccion: ''},
-                                    { id: 4, descripcion: 'Responde bajo presión', seleccion: ''},
-                                    { id: 5, descripcion: 'Manejo de conflictos', seleccion: ''}
-                                  ];
-
-
-
-
             // function to process the form
             $scope.processForm = function() {
-                alert('awesome!');
+                var instanceRes = {
+                                     _id: '',
+                                     evaluador: '',
+                                     evaluado: '',
+                                     eval: '',
+                                     comunicacion: [],
+                                     desempenio: [],
+                                     factorhumano: [],
+                                     liderazgo: [],
+                                     habilidades: []  
+                                    }
+                instanceRes._id = $scope.currentInstance._id;
+                instanceRes.evaluador = $scope.currentInstance.evaluador;
+                instanceRes.evaluado = $scope.currentInstance.evaluado._id;
+                instanceRes.eval = $scope.currentInstance.eval._id;
+                angular.forEach($scope.currentInstance.eval.comunicacion, function(value, key){
+                    var item = {puntaje:0};
+
+                    if (value.hasOwnProperty('seleccion')){
+                        switch (value.seleccion){
+                            case 'malo':
+                                item.puntaje = 1;
+                                break;
+                            case 'regular':
+                                item.puntaje = 5;
+                                break;
+                            case 'bueno':
+                                item.puntaje = 10;
+                                break;
+                            case 'excelente':
+                                item.puntaje = 20;
+                                break;
+                        }
+                    }
+                    instanceRes.comunicacion.push(item);
+                });
+
+                angular.forEach($scope.currentInstance.eval.desempenio, function(value, key){
+                    var item = {puntaje:0};
+
+                    if (value.hasOwnProperty('seleccion')){
+                        switch (value.seleccion){
+                            case 'malo':
+                                item.puntaje = 1;
+                                break;
+                            case 'regular':
+                                item.puntaje = 5;
+                                break;
+                            case 'bueno':
+                                item.puntaje = 10;
+                                break;
+                            case 'excelente':
+                                item.puntaje = 20;
+                                break;
+                        }
+                    }
+                    instanceRes.desempenio.push(item);
+                });
+
+                angular.forEach($scope.currentInstance.eval.factorhumano, function(value, key){
+                    var item = {puntaje:0};
+
+                    if (value.hasOwnProperty('seleccion')){
+                        switch (value.seleccion){
+                            case 'malo':
+                                item.puntaje = 1;
+                                break;
+                            case 'regular':
+                                item.puntaje = 5;
+                                break;
+                            case 'bueno':
+                                item.puntaje = 10;
+                                break;
+                            case 'excelente':
+                                item.puntaje = 20;
+                                break;
+                        }
+                    }
+                    instanceRes.factorhumano.push(item);
+                });
+
+
+                angular.forEach($scope.currentInstance.eval.liderazgo, function(value, key){
+                    var item = {puntaje:0};
+
+                    if (value.hasOwnProperty('seleccion')){
+                        switch (value.seleccion){
+                            case 'malo':
+                                item.puntaje = 1;
+                                break;
+                            case 'regular':
+                                item.puntaje = 5;
+                                break;
+                            case 'bueno':
+                                item.puntaje = 10;
+                                break;
+                            case 'excelente':
+                                item.puntaje = 20;
+                                break;
+                        }
+                    }
+                    instanceRes.liderazgo.push(item);
+                });
+
+                angular.forEach($scope.currentInstance.eval.habilidades, function(value, key){
+                    var item = {puntaje:0};
+
+                    if (value.hasOwnProperty('seleccion')){
+                        switch (value.seleccion){
+                            case 'malo':
+                                item.puntaje = 1;
+                                break;
+                            case 'regular':
+                                item.puntaje = 5;
+                                break;
+                            case 'bueno':
+                                item.puntaje = 10;
+                                break;
+                            case 'excelente':
+                                item.puntaje = 20;
+                                break;
+                        }
+                    }
+                    instanceRes.habilidades.push(item);
+                });
+                Instance.Update(instanceRes).then(function (response) {                
+                    $scope.open('success');
+                })      
             };
+
+
+            $scope.data = {
+              boldTextTitle: "Exito",
+              textAlert : "La evaluación ha concluido y los resultados serán evaluados",
+              mode : 'success'
+            }  
+
+           $scope.open = function (mode) {
+
+                $scope.data.mode = mode;
+
+                var modalInstance = $modal.open({
+                  templateUrl: 'views/eval/alertmodal.html',
+                  controller: 'ModalInstanceCtrl',
+                  backdrop: true,
+                  keyboard: true,
+                  backdropClick: true,
+                  size: 'lg',
+                  resolve: {
+                    data: function () {
+                      return $scope.data;
+                    }
+                  }
+                 });
+
+
+                modalInstance.result.then(function (selectedItem) {
+                  $scope.selected = selectedItem;
+                    //alert( $scope.selected);
+                }, function () {
+                  $log.info('Modal dismissed at: ' + new Date());                
+                });
+
+             }
+
     
         }]);
-    
+   
+

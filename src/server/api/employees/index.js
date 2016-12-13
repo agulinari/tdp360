@@ -6,7 +6,7 @@ var router = express.Router();
 // Define routes
 router.get('/', controller.index);
 router.get('/:id', controller.show);
-router.get('/search', controller.search);
+router.get('/search/:text', controller.filtrar);
 router.get('/:id/subs', controller.subs);
 router.get('/area/:area', controller.area);
 router.post('/', controller.create);

@@ -7,8 +7,7 @@
          .controller('EmployeeCtrl', ['$scope', '$state', '$stateParams', '$modal', '$log', 'Employee', function ($scope, $state, $stateParams, $modal, $log, Employee) {
 
             var employeeId = $stateParams.employeeId;
-
-            $scope.searchText = '';
+          
             $scope.employees = searchEmployees();
             $scope.contacts = [];
             $scope.employee = null;
@@ -16,11 +15,11 @@
             $scope.jefe = null;
             $scope.subs = [];            
 
-            $scope.$watch('searchText', function (newVal, oldVal) {
+           /* $scope.$watch('searchText', function (newVal, oldVal) {
             if (newVal != oldVal) {
                 searchEmployees();
             }
-            }, true);
+            }, true); */
 
 
             function findJefe(){
@@ -40,7 +39,7 @@
             }
 
             function searchEmployees() {
-                //Employee.Search(self.searchText)
+                //Employee.Search($scope.searchText)
                 Employee.Find()
                 .then(function (data) {
                     $scope.employees = Employee.employees;

@@ -29,12 +29,7 @@ angular.module('sbAdminApp')
     // Search Employees
     employeeService.Search = function (text) {
        var deferred = $q.defer();
-       return $http({
-           url: baseUrl + 'search',
-           method: 'GET',
-           params: { 'searchText': text },
-           cache: false
-       }).success(function (data) {
+       return $http.get(baseUrl + "search/" + text).success(function (data) {
            deferred.resolve(
                employeeService.employees = data);
        }).error(function (error) {

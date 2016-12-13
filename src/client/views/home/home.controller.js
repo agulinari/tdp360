@@ -7,5 +7,6 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-  .controller('MainCtrl', function($scope,$position) {
+  .directive("notifications", function () { return { restrict: 'E', replace: 'true', templateUrl: 'views/home/notifications.html' } })       
+  .controller('HomeCtrl', function($scope,$position) {
   });
