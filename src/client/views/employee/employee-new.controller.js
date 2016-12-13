@@ -1,7 +1,7 @@
 var app = angular.module("sbAdminApp")
 app.controller('EmployeeNewCtrl', 
- ['$scope', '$modalInstance', 'Employee',
- function ($scope, $modalInstance, Employee) {
+ ['$scope', '$timeout', '$modalInstance', 'Employee',
+ function ($scope, $timeout, $modalInstance, Employee) {
 
     $scope.employee = {};
     $scope.headerTitle = 'Add Employee';
@@ -20,6 +20,25 @@ app.controller('EmployeeNewCtrl',
                 $modalInstance.close(response.data);
             })        
     };
+
+    $scope.fileReaderSupported = window.FileReader != null;
+    $scope.photoChanged = function(files) {
+      if (files != null) {
+        var file = files[0];
+         if ($scope.fileReaderSupported && file.type.indexOf('image') > -1) {
+          $timeout(function() {
+            var fileReader = new FileReader();
+            fileReader.readAsDataURL(file); // convert the image to data url. 
+            fileReader.onload = function(e) {
+              $timeout(function() {
+                $scope.employee.image = e.target.result; // Retrieve the image. 
+              });
+            }
+          });
+        }
+      }
+    };
+
 
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');

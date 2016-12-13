@@ -7,7 +7,7 @@
               $scope.data = data;
               $scope.close = function(/*result*/){
                 $modalInstance.close($scope.data);
-                $state.go('dashboard.evaluate');
+                $state.go('dashboard.evaluate', {}, { reload: true });
               };
             }])   
          .controller('EvalCtrl', ['$scope', '$cookieStore', '$state', '$stateParams', '$modal', '$log', 'Instance', 'Employee', 'Eval', function ($scope, $cookieStore, $state, $stateParams, $modal, $log, Instance, Employee, Eval) {
@@ -183,6 +183,7 @@
                     }
                     instanceRes.habilidades.push(item);
                 });
+                instanceRes.status = 'F';
                 Instance.Update(instanceRes).then(function (response) {                
                     $scope.open('success');
                 })      

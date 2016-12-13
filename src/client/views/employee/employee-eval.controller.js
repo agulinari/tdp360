@@ -33,6 +33,7 @@ app.controller('EmployeeEvalCtrl',
             instance.evaluador = $scope.eval.evaluador._id;
             instance.evaluado = $scope.eval.evaluado._id;
             instance.eval = $scope.eval._id;
+            instance.status = 'N';
             instance.comunicacion =  [];
             instance.desempenio = [];
             instance.factorhumano = [];
