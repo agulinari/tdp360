@@ -85,6 +85,14 @@ body {
     left: auto;
 }
 
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 2px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
 .sidebar .sidebar-nav.navbar-collapse {
     padding-right: 0;
     padding-left: 0;

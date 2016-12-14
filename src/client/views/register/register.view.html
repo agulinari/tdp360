@@ -1,7 +1,9 @@
 ﻿<div class="col-md-6 col-md-offset-3">
 <div ng-controller="RegisterController as vm">
+    <img ng-src="images/logo2.png" alt='logo image' class="img-responsive center-block" />
     <h2>Register</h2>
     <form name="form" ng-submit="vm.register()" role="form">
+
         <div class="form-group" ng-class="{ 'has-error': form.dni.$dirty && form.dni.$error.required }">
             <label for="dni">DNI</label>
             <input type="text" name="dni" id="dni" class="form-control" ng-model="vm.user.dni" required />

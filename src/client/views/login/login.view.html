@@ -1,7 +1,9 @@
 ﻿<div class="col-md-6 col-md-offset-3">
 <div ng-controller="LoginController as vm">
+    <img ng-src="images/logo2.png" alt='logo image' class="img-responsive center-block" />
     <h2>Login</h2>
     <form name="form" ng-submit="vm.login()" role="form">
+        
         <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
             <label for="username">Username</label>
             <input type="text" name="username" id="username" class="form-control" ng-model="vm.username" required />

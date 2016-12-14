@@ -94,7 +94,7 @@ background-color: #eee;
 /* style.css */
 /* BASIC STYLINGS
 ============================================================================= */
-body                            { padding-top:20px; }
+body                            { padding-top:0px; }
 
 /* form styling */
 #form-container                { background:#f9f9f9; margin-bottom:20px;
