@@ -153,6 +153,8 @@ angular
             $ocLazyLoad.load({
               name:'sbAdminApp',
               files:[
+                                    'views/app-services/employee.service.js',  
+                      'views/app-services/instance.service.js',   
                 'views/app-services/stats.service.js',               
                 'views/stats/stats.controller.js'                    
               ]

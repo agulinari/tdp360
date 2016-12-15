@@ -1,3 +1,4 @@
+<div ng-controller="StatsCtrl as vm">
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Estad&iacute;sticas</h1>
@@ -5,65 +6,52 @@
     <!-- /.col-lg-12 -->
 </div>
 <div class="row">
-    <div class="col-lg-6 col-sm-12" id="line-chart" ng-controller="StatsCtrl">
+     <div class="form-group">
+                    <label for="inputEmp" class="col-lg-3 control-label">Empleado</label>
+                    <div class="col-lg-8">
+                        <select class="form-control" ng-model="evaluado" ng-change="update(evaluado)" ng-options="employee._id as employee.fullName for employee in employees">
+                              <option value="">Elige un empleado</option>
+                        </select>
+                    </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="col-lg-6 col-sm-12" id="radar-chart" >
         <div class="panel panel-default">
-            <div class="panel-heading">Line Chart</div>
+            <div class="panel-heading">Desempeño seg&uacute;n categor&iacute;a</div>
             <div class="panel-body">
-                <canvas id="line" class="chart chart-line chart-xl" data="line.data" labels="line.labels" legend="true"
-                click="line.onClick" series="line.series"></canvas>
+                <canvas id="area" class="chart chart-radar" data="vm.radar.data" labels="vm.radar.labels" click="onClick"></canvas>
             </div>
         </div>
-    </div>   
+    </div>    
     <div class="col-lg-6 col-sm-12" id="bar-chart" >
         <div class="panel panel-default">
-            <div class="panel-heading">Bar Chart</div>
+            <div class="panel-heading">Seg&uacute;n evaluador</div>
             <div class="panel-body">
-                <canvas id="bar" class="chart chart-bar" data="bar.data" labels="bar.labels" series="bar.series"
-                options="bar.options"></canvas>
+                <canvas id="bar" class="chart chart-bar" data="vm.bar.data" labels="vm.bar.labels" series="vm.bar.series"
+                options="vm.bar.options"></canvas>
             </div>
         </div>
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-6 col-sm-12" id="doughnut-chart" >
+    <div class="col-lg-6 col-sm-12" id="line-chart" ng-controller="StatsCtrl">
         <div class="panel panel-default">
-            <div class="panel-heading">Doughnut Chart</div>
+            <div class="panel-heading">Desempeño en el año</div>
             <div class="panel-body">
-            <canvas id="doughnut" class="chart chart-doughnut chart-xs" data="donut.data" labels="donut.labels" legend="false"></canvas>
+                <canvas id="line" class="chart chart-line chart-xl" data="vm.line.data" labels="vm.line.labels" legend="true"
+                click="vm.line.onClick" series="vm.line.series"></canvas>
             </div>
         </div>
-    </div>
-    <div class="col-lg-6 col-sm-12" id="radar-chart" >
-        <div class="panel panel-default">
-            <div class="panel-heading">Radar Chart</div>
-            <div class="panel-body">
-                <canvas id="area" class="chart chart-radar" data="radar.data" labels="radar.labels" click="onClick"></canvas>
-            </div>
-        </div>
-    </div>
+    </div>   
     <div class="col-lg-6 col-sm-12" id="pie-chart">
         <div class="panel panel-default">
-            <div class="panel-heading">Pie Chart</div>
+            <div class="panel-heading">Competencias</div>
             <div class="panel-body">
-                <canvas id="pie" class="chart chart-pie chart-xs" data="pie.data" labels="pie.labels"></canvas>
+                <canvas id="pie" class="chart chart-pie chart-xs" data="vm.pie.data" labels="vm.pie.labels"></canvas>
             </div>
         </div>
     </div>
-    <div class="col-lg-6 col-sm-12" id="polar area-chart" >
-      <div class="panel panel-default">
-        <div class="panel-heading">Polar Area Chart</div>
-        <div class="panel-body">
-          <canvas id="polar" class="chart chart-polar-area" data="polar.data" labels="polar.labels"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-6 col-sm-12" id="base-chart" >
-        <div class="panel panel-default">
-            <div class="panel-heading">Dynamic Chart</div>
-            <div class="panel-body">
-            <canvas id="base" class="chart chart-base" chart-type="dynamic.type" data="dynamic.data" labels="dynamic.labels" legend="true"></canvas>
-            </div>
-        </div>
-        <button type="button" class="btn btn-primary pull-right" ng-click="dynamic.toggle()">Toggle</button>
-    </div>
+</div>
 </div>

@@ -26,6 +26,15 @@ exports.search = function(req, res) {
   });
 };
 
+exports.stats = function(req, res) {
+  Instance.find({'evaluado' : req.params.id }).
+  where('status').equals('F').
+  exec(function (err, instances) {
+    if(err) { return handleError(res, err); }  
+    return res.status(200).json(instances);
+  });
+};
+
 // Creates a new instances in the DB.
 exports.create = function(req, res) {
   Instance.create(req.body, function(err, instances) {
