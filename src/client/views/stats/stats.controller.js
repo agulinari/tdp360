@@ -192,27 +192,29 @@ $scope.update = function(evaluado) {
                     var ides = 0;
                     var promdes = 0;               
 
-                    insts.forEach(function (inst){                    
-                         inst.comunicacion.forEach(function (com){
-                            acumcom = acumcom + com.puntaje;
-                            icom++;
-                         });
-                         inst.liderazgo.forEach(function (com){
-                            acumlid = acumlid + com.puntaje;
-                            ilid++;
-                         });
-                         inst.factorhumano.forEach(function (com){
-                            acumfh = acumfh + com.puntaje;
-                            ifh++;
-                         });
-                         inst.habilidades.forEach(function (com){
-                            acumhab = acumhab + com.puntaje;
-                            ihab++;
-                         });
-                         inst.desempenio.forEach(function (com){
-                            acumdes = acumdes + com.puntaje;
-                            ides++;
-                         });
+                    insts.forEach(function (inst){
+                         if (inst.status === 'F'){                    
+                             inst.comunicacion.forEach(function (com){
+                                acumcom = acumcom + com.puntaje;
+                                icom++;
+                             });
+                             inst.liderazgo.forEach(function (com){
+                                acumlid = acumlid + com.puntaje;
+                                ilid++;
+                             });
+                             inst.factorhumano.forEach(function (com){
+                                acumfh = acumfh + com.puntaje;
+                                ifh++;
+                             });
+                             inst.habilidades.forEach(function (com){
+                                acumhab = acumhab + com.puntaje;
+                                ihab++;
+                             });
+                             inst.desempenio.forEach(function (com){
+                                acumdes = acumdes + com.puntaje;
+                                ides++;
+                             });
+                        }
                     });
                     if (icom != 0){
                         promcom = (acumcom*5)/icom;                        
